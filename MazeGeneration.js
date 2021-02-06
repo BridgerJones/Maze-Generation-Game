@@ -109,7 +109,7 @@ class Cell {
     }
   }
 
-  function getWalls(){
+  getWalls(){
     let walls = [];
     if (this.left != null){
       walls.push(this.left);
@@ -141,5 +141,16 @@ class Grid {
   }
 }
 
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
+}
+
+
 let grid = new Grid(5,5);
-console.log(grid.grid[0][0]);
+let startingX = getRandomInt(0,5);
+let startingY = getRandomInt(0,5);
+console.log(`${startingX} and ${startingY}`)
+let startingCell = grid.grid[startingX][startingY];
+console.log(startingCell);
