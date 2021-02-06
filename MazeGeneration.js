@@ -108,6 +108,23 @@ class Cell {
       this.bottom.y = y + 1;
     }
   }
+
+  function getWalls(){
+    let walls = [];
+    if (this.left != null){
+      walls.push(this.left);
+    }
+    if (this.top != null){
+      walls.push(this.top);
+    }
+    if (this.right != null){
+      walls.push(this.right);
+    }
+    if (this.bottom != null){
+      walls.push(this.bottom);
+    }
+    return walls;
+  }
 }
 
 class Grid {
