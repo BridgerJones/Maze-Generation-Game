@@ -139,8 +139,8 @@ class Grid {
       }
     }
   }
-  isCellWall(x, y){
-    return this.grid[x][y].isWall;
+  isCellPath(x, y){
+    return !this.grid[x][y].isWall;
   }
 }
 
@@ -178,13 +178,13 @@ while (wallList.length != 0){
 
   console.log(currentWall);
   console.log(grid.grid[currentWall.x][currentWall.y]);
-  let pathCount = 4;
+  let pathCount = 0;
   grid.grid[currentWall.x][currentWall.y].getWalls().forEach(wall => {
-    if (grid.isCellWall(wall.x, wall.y)){
-      pathCount--;
+    if (grid.isCellPath(wall.x, wall.y)){
+      pathCount++;
     }
   });
-  if (pathCount < 3){
+  if (pathCount < 2){
     grid.grid[currentWall.x][currentWall.y].isWall = false;
     grid.grid[currentWall.x][currentWall.y].getWalls().forEach(wall => {
       wallList.push(wall);
