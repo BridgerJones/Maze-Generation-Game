@@ -135,9 +135,12 @@ class Grid {
     }
     for(let i = 0; i < x; i++){
       for(let j = 0; j < y; j++){
-        this.grid[i][j] = new Cell(i, j, x, y);
+        this.grid[i][j] = new Cell(i, j, x -1, y - 1);
       }
     }
+  }
+  isCellWall(x, y){
+    return this.grid[x][y].isWall;
   }
 }
 
@@ -148,9 +151,68 @@ function getRandomInt(min, max) {
 }
 
 
-let grid = new Grid(5,5);
-let startingX = getRandomInt(0,5);
-let startingY = getRandomInt(0,5);
+let grid = new Grid(10,10);
+let startingX = getRandomInt(0,10);
+let startingY = getRandomInt(0,10);
 console.log(`${startingX} and ${startingY}`)
+
 let startingCell = grid.grid[startingX][startingY];
-console.log(startingCell);
+console.log(startingCell)
+
+// wallList
+let wallList = [];
+//mark starting cell as a path
+startingCell.isWall = false;
+// add the starting cells walls to list
+startingCell.getWalls().forEach(wall => {
+  if (grid.grid[wall.x][wall.y].isWall){
+    wallList.push(wall);
+  }
+
+});
+console.log(wallList);
+while (wallList.length != 0){
+
+  let randomIndex = getRandomInt(0, wallList.length)
+  let currentWall = wallList[randomIndex];
+
+  console.log(currentWall);
+  console.log(grid.grid[currentWall.x][currentWall.y]);
+  let pathCount = 4;
+  grid.grid[currentWall.x][currentWall.y].getWalls().forEach(wall => {
+    if (grid.isCellWall(wall.x, wall.y)){
+      pathCount--;
+    }
+  });
+  if (pathCount < 3){
+    grid.grid[currentWall.x][currentWall.y].isWall = false;
+    grid.grid[currentWall.x][currentWall.y].getWalls().forEach(wall => {
+      wallList.push(wall);
+    });
+  }
+  // if (grid.grid[currentWall.x][currentWall.y].isPathEligible()){
+  //   grid.grid[currentWall.x][currentWall.y].isWall = false;
+  //
+  //   grid.grid[currentWall.x][currentWall.y].getWalls().forEach(wall => {
+  //     if (grid.grid[wall.x][wall.y].isWall){
+  //       wallList.push(wall);
+  //     }
+  //   });
+  // }
+  wallList.splice(randomIndex, 1);
+
+}
+output = [];
+for (let i = 0; i < 10; i++){
+  for (let j = 0; j < 10; j++){
+    if (grid.grid[i][j].isWall){
+      output.push("X");
+    }
+    else {
+      output.push(" ");
+    }
+  }
+  output.push("\n");
+}
+
+console.log(output.toString());
