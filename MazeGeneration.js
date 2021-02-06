@@ -150,10 +150,10 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
 }
 
-
-let grid = new Grid(10,10);
-let startingX = getRandomInt(0,10);
-let startingY = getRandomInt(0,10);
+const dimension = 20
+let grid = new Grid(dimension,dimension);
+let startingX = getRandomInt(0,dimension);
+let startingY = getRandomInt(0,dimension);
 console.log(`${startingX} and ${startingY}`)
 
 let startingCell = grid.grid[startingX][startingY];
@@ -203,8 +203,8 @@ while (wallList.length != 0){
 
 }
 output = [];
-for (let i = 0; i < 10; i++){
-  for (let j = 0; j < 10; j++){
+for (let i = 0; i < dimension; i++){
+  for (let j = 0; j < dimension; j++){
     if (grid.grid[i][j].isWall){
       output.push("X");
     }
