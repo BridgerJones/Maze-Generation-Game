@@ -206,13 +206,13 @@ output = [];
 for (let i = 0; i < dimension; i++){
   for (let j = 0; j < dimension; j++){
     if (grid.grid[i][j].isWall){
-      output.push("X");
+      output.push("#");
     }
     else {
-      output.push(" ");
+      output.push("O");
     }
   }
   output.push("\n");
 }
 
-console.log(output.toString());
+console.log(output.toString().replace(/,/g, ""));
