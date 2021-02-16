@@ -128,6 +128,7 @@ class Cell {
 }
 
 class Grid {
+
   constructor(x, y){
     this.grid = new Array(x);
     for (let i = 0; i < x; i++){
@@ -149,70 +150,68 @@ function getRandomInt(min, max) {
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
 }
+function generateMaze(dimension){
+  let grid = new Grid(dimension,dimension);
+  // create size property on maze object
+  grid.dimension = dimension;
+  let startingX = getRandomInt(0,dimension);
+  let startingY = getRandomInt(0,dimension);
+  console.log(`${startingX} and ${startingY}`)
 
-const dimension = 20
-let grid = new Grid(dimension,dimension);
-let startingX = getRandomInt(0,dimension);
-let startingY = getRandomInt(0,dimension);
-console.log(`${startingX} and ${startingY}`)
+  let startingCell = grid.grid[startingX][startingY];
+  console.log(startingCell)
 
-let startingCell = grid.grid[startingX][startingY];
-console.log(startingCell)
-
-// wallList
-let wallList = [];
-//mark starting cell as a path
-startingCell.isWall = false;
-// add the starting cells walls to list
-startingCell.getWalls().forEach(wall => {
-  if (grid.grid[wall.x][wall.y].isWall){
-    wallList.push(wall);
-  }
-
-});
-console.log(wallList);
-while (wallList.length != 0){
-
-  let randomIndex = getRandomInt(0, wallList.length)
-  let currentWall = wallList[randomIndex];
-
-  console.log(currentWall);
-  console.log(grid.grid[currentWall.x][currentWall.y]);
-  let pathCount = 0;
-  grid.grid[currentWall.x][currentWall.y].getWalls().forEach(wall => {
-    if (grid.isCellPath(wall.x, wall.y)){
-      pathCount++;
-    }
-  });
-  if (pathCount < 2){
-    grid.grid[currentWall.x][currentWall.y].isWall = false;
-    grid.grid[currentWall.x][currentWall.y].getWalls().forEach(wall => {
+  // wallList
+  let wallList = [];
+  //mark starting cell as a path
+  startingCell.isWall = false;
+  // add the starting cells walls to list
+  startingCell.getWalls().forEach(wall => {
+    if (grid.grid[wall.x][wall.y].isWall){
       wallList.push(wall);
+    }
+
+  });
+  console.log(wallList);
+  while (wallList.length != 0){
+
+    let randomIndex = getRandomInt(0, wallList.length)
+    let currentWall = wallList[randomIndex];
+
+    console.log(currentWall);
+    console.log(grid.grid[currentWall.x][currentWall.y]);
+    let pathCount = 0;
+    grid.grid[currentWall.x][currentWall.y].getWalls().forEach(wall => {
+      if (grid.isCellPath(wall.x, wall.y)){
+        pathCount++;
+      }
     });
-  }
-  // if (grid.grid[currentWall.x][currentWall.y].isPathEligible()){
-  //   grid.grid[currentWall.x][currentWall.y].isWall = false;
-  //
-  //   grid.grid[currentWall.x][currentWall.y].getWalls().forEach(wall => {
-  //     if (grid.grid[wall.x][wall.y].isWall){
-  //       wallList.push(wall);
-  //     }
-  //   });
-  // }
-  wallList.splice(randomIndex, 1);
-
-}
-output = [];
-for (let i = 0; i < dimension; i++){
-  for (let j = 0; j < dimension; j++){
-    if (grid.grid[i][j].isWall){
-      output.push("#");
+    if (pathCount < 2){
+      grid.grid[currentWall.x][currentWall.y].isWall = false;
+      grid.grid[currentWall.x][currentWall.y].getWalls().forEach(wall => {
+        wallList.push(wall);
+      });
     }
-    else {
-      output.push("O");
-    }
+    wallList.splice(randomIndex, 1);
   }
-  output.push("\n");
+  return grid;
+}
+function displayMazeToConsole(maze){
+  output = [];
+  for (let i = 0; i < maze.dimension; i++){
+    for (let j = 0; j < maze.dimension; j++){
+      if (maze.grid[i][j].isWall){
+        output.push("#");
+      }
+      else {
+        output.push("O");
+      }
+    }
+    output.push("\n");
+  }
+
+  console.log(output.toString().replace(/,/g, ""));
 }
 
-console.log(output.toString().replace(/,/g, ""));
+let maze = generateMaze(20);
+displayMazeToConsole(maze);
