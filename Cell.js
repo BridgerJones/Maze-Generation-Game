@@ -27,6 +27,8 @@ class Cell {
       this.right.y = y;
       this.bottom.x = x;
       this.bottom.y = y + 1;
+      this.left = null;
+      this.top = null;
     }
     // top right corner
     else if (x == xMax && y == 0){
@@ -34,6 +36,8 @@ class Cell {
       this.left.y = y;
       this.bottom.x = x;
       this.bottom.y = y + 1;
+      this.top = null;
+      this.right = null;
     }
     // bottom right corner
     else if (x == xMax && y == yMax){
@@ -41,6 +45,8 @@ class Cell {
       this.top.y = y - 1;
       this.left.x = x - 1;
       this.left.y = y;
+      this.bottom = null;
+      this.right = null;
     }
     // bottom left corner
     else if (x == 0 && y == yMax){
@@ -48,6 +54,8 @@ class Cell {
       this.top.y = y - 1;
       this.right.x = x + 1;
       this.right.y = y;
+      this.bottom = null;
+      this.left = null;
     }
     // left edge
     else if (x == 0){
@@ -57,6 +65,7 @@ class Cell {
       this.right.y = y;
       this.bottom.x = x;
       this.bottom.y = y + 1;
+      this.left = null;
     }
     // top edge
     else if (y == 0){
@@ -66,6 +75,7 @@ class Cell {
       this.right.y = y;
       this.bottom.x = x;
       this.bottom.y = y + 1;
+      this.top = null;
     }
     // right edge
     else if (x == xMax){
@@ -75,6 +85,7 @@ class Cell {
       this.top.y = y - 1;
       this.bottom.x = x;
       this.bottom.y = y + 1;
+      this.right = null;
     }
     //bottom edge
     else if (y == yMax){
@@ -84,6 +95,7 @@ class Cell {
       this.top.y = y - 1;
       this.right.x = x + 1;
       this.right.y = y;
+      this.bottom = null;
     }
     else {
       this.left.x = x - 1;
@@ -95,5 +107,22 @@ class Cell {
       this.bottom.x = x;
       this.bottom.y = y + 1;
     }
+  }
+
+  getWalls(){
+    let walls = [];
+    if (this.left != null){
+      walls.push(this.left);
+    }
+    if (this.top != null){
+      walls.push(this.top);
+    }
+    if (this.right != null){
+      walls.push(this.right);
+    }
+    if (this.bottom != null){
+      walls.push(this.bottom);
+    }
+    return walls;
   }
 }
