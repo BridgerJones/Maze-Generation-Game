@@ -212,6 +212,3 @@ function displayMazeToConsole(maze){
 
   console.log(output.toString().replace(/,/g, ""));
 }
-
-let maze = generateMaze(20);
-displayMazeToConsole(maze);
