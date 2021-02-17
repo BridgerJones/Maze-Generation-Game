@@ -98,13 +98,15 @@ function Corners() {
   }
   cornerSE.src = "./assets/Tiles/OuterWallCornerSE.png";
 }
-window.onload = function() {
+
+function onInit(){
   OuterWall();
   InnerWallN();
   InnerWallS();
   InnerWallW();
   InnerWallE();
   Corners();
-
-
 }
+
+//main
+onInit();
