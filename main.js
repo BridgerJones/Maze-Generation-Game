@@ -3,7 +3,8 @@ let events = [];
 // holds the initial time stamp from which elapsed will be calculated
 let start;
 let initialized = 0;
-const maze = generateMaze(20);
+let mazeDimension = 200;
+const maze = generateMaze(mazeDimension);
 
 
 // initial call to start gameLoop

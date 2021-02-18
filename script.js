@@ -1,80 +1,82 @@
-function drawOuterWall(ctx, img){
-  for (let x = 0; x <= 1104; x += 48){
+function drawOuterWall(ctx, img, outerWallBound){
+  for (let x = 0; x <= outerWallBound; x += 48){
     ctx.drawImage(img, x, 0);
-    ctx.drawImage(img, x, 1104);
+    ctx.drawImage(img, x, outerWallBound);
     ctx.drawImage(img, 0, x);
-    ctx.drawImage(img, 1104, x);
+    ctx.drawImage(img, outerWallBound, x);
   }
 }
-function OuterWall(){
+function OuterWall(outerWallBound){
   let canvas = document.getElementById("main");
   let ctx = canvas.getContext("2d");
   let img = new Image();
   img.onload = function() {
-    drawOuterWall(ctx, img);
+    drawOuterWall(ctx, img, outerWallBound);
   }
 
   img.src = "./assets/Tiles/OuterWallT.png";
 }
-function drawInnerWallN(ctx, img){
-  for (let x = 96; x <= 1008; x += 48){
+function drawInnerWallN(ctx, img, innerWallBound){
+  for (let x = 96; x <= innerWallBound; x += 48){
     ctx.drawImage(img, x, 48);
   }
 }
-function InnerWallN(){
+function InnerWallN(innerWallBound){
   let canvas = document.getElementById("main");
   let ctx = canvas.getContext("2d");
   let img = new Image();
   img.onload = function() {
-    drawInnerWallN(ctx, img);
+    drawInnerWallN(ctx, img, innerWallBound);
   }
   img.src = "./assets/Tiles/OuterWallN.png";
 }
-function drawInnerWallS(ctx, img){
-  for (let x = 96; x <= 1008; x += 48){
-    ctx.drawImage(img, x, 1056);
+function drawInnerWallS(ctx, img, innerWallBound, drawingBound){
+  for (let x = 96; x <= innerWallBound; x += 48){
+    ctx.drawImage(img, x, drawingBound);
   }
 }
-function InnerWallS(){
+function InnerWallS(innerWallBound, drawingBound){
   let canvas = document.getElementById("main");
   let ctx = canvas.getContext("2d");
   let img = new Image();
   img.onload = function() {
-    drawInnerWallS(ctx, img);
+    drawInnerWallS(ctx, img, innerWallBound, drawingBound);
   }
   img.src = "./assets/Tiles/OuterWallS.png";
 }
 
-function drawInnerWallW(ctx, img){
-  for (let y = 96; y <= 1008; y += 48){
+function drawInnerWallW(ctx, img, innerWallBound){
+  for (let y = 96; y <= innerWallBound; y += 48){
     ctx.drawImage(img, 48, y);
   }
 }
-function InnerWallW(){
+function InnerWallW(innerWallBound){
   let canvas = document.getElementById("main");
   let ctx = canvas.getContext("2d");
   let img = new Image();
   img.onload = function() {
-    drawInnerWallW(ctx, img);
+    drawInnerWallW(ctx, img, innerWallBound);
   }
   img.src = "./assets/Tiles/OuterWallW.png";
 }
 
-function drawInnerWallE(ctx, img){
-  for (let y = 96; y <= 1008; y += 48){
-    ctx.drawImage(img, 1056, y);
+function drawInnerWallE(ctx, img, innerWallBound, drawingBound){
+  for (let y = 96; y <= innerWallBound; y += 48){
+    ctx.drawImage(img, drawingBound, y);
   }
 }
-function InnerWallE(){
+function InnerWallE(innerWallBound, drawingBound){
   let canvas = document.getElementById("main");
   let ctx = canvas.getContext("2d");
   let img = new Image();
   img.onload = function() {
-    drawInnerWallE(ctx, img);
+    drawInnerWallE(ctx, img, innerWallBound, drawingBound);
   }
   img.src = "./assets/Tiles/OuterWallE.png";
 }
-function Corners() {
+function Corners(cornerBound) {
+
+
   let canvas = document.getElementById("main");
   let ctx = canvas.getContext("2d");
   let cornerNW = new Image();
@@ -86,15 +88,15 @@ function Corners() {
   }
   cornerNW.src = "./assets/Tiles/OuterWallCornerNW.png";
   cornerNE.onload = function(){
-    ctx.drawImage(cornerNE, 1056, 48);
+    ctx.drawImage(cornerNE, cornerBound, 48);
   }
   cornerNE.src = "./assets/Tiles/OuterWallCornerNE.png";
   cornerSW.onload = function(){
-    ctx.drawImage(cornerSW, 48, 1056);
+    ctx.drawImage(cornerSW, 48, cornerBound);
   }
   cornerSW.src = "./assets/Tiles/OuterWallCornerSW.png";
   cornerSE.onload = function(){
-    ctx.drawImage(cornerSE, 1056, 1056);
+    ctx.drawImage(cornerSE, cornerBound, cornerBound);
   }
   cornerSE.src = "./assets/Tiles/OuterWallCornerSE.png";
 }
@@ -102,8 +104,8 @@ function drawWalls(maze, ctx, img){
 
   let x = 96;
   let y = 96;
-  for (let column = 0; column < 20; column++){
-    for (let row = 0; row < 20; row++){
+  for (let column = 0; column < maze.dimension; column++){
+    for (let row = 0; row < maze.dimension; row++){
       console.log(`x: ${x} y: ${y}`);
       if (maze.grid[column][row].isWall){
         ctx.drawImage(img, x, y);
@@ -119,8 +121,8 @@ function drawPaths(maze, ctx, img){
 
   let x = 96;
   let y = 96;
-  for (let column = 0; column < 20; column++){
-    for (let row = 0; row < 20; row++){
+  for (let column = 0; column < maze.dimension; column++){
+    for (let row = 0; row < maze.dimension; row++){
       console.log(`x: ${x} y: ${y}`);
       if (maze.grid[column][row].isWall === false){
         ctx.drawImage(img, x, y);
@@ -148,11 +150,21 @@ function Maze(maze){
   pathImage.src = "./assets/Tiles/PathNeutral3x.png";
 }
 function renderMaze(maze){
-  OuterWall();
-  InnerWallN();
-  InnerWallS();
-  InnerWallW();
-  InnerWallE();
-  Corners();
+  // resize canvas if not default canvas element
+  let canvas = document.getElementById("main");
+  let canvasBounds = (maze.dimension + 4) * 48;
+  canvas.width = canvasBounds;
+  canvas.height = canvasBounds;
+  let outerWallBound = (maze.dimension + 3) * 48;
+  let innerWallBound = (maze.dimension + 1) * 48;
+  let cornerBound = (maze.dimension + 2) * 48;
+  let drawingBound = (maze.dimension + 2) * 48;
+
+  OuterWall(outerWallBound);
+  InnerWallN(innerWallBound);
+  InnerWallS(innerWallBound, drawingBound);
+  InnerWallW(innerWallBound);
+  InnerWallE(innerWallBound, drawingBound);
+  Corners(cornerBound);
   Maze(maze);
 }
