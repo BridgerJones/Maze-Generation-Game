@@ -131,10 +131,10 @@ function drawPaths(maze, ctx, img){
     y += 48;
   }
 }
-function Maze(){
+function Maze(maze){
   let canvas = document.getElementById("main");
   let ctx = canvas.getContext("2d");
-  let maze = generateMaze(20);
+
   let wallImage = new Image();
   wallImage.onload = function(){
     drawWalls(maze, ctx, wallImage);
@@ -147,15 +147,12 @@ function Maze(){
   }
   pathImage.src = "./assets/Tiles/PathNeutral3x.png";
 }
-function onInit(){
+function renderMaze(maze){
   OuterWall();
   InnerWallN();
   InnerWallS();
   InnerWallW();
   InnerWallE();
   Corners();
-  Maze();
+  Maze(maze);
 }
-
-//main
-onInit();
