@@ -1,9 +1,11 @@
 // array to hold all of the EventLog Objects
 let events = [];
+// game config object
+let Config = new Configuration();
 // holds the initial time stamp from which elapsed will be calculated
 let start;
-let initialized = 0;
-let mazeDimension = 200;
+let initialized = Config.FALSE;
+let mazeDimension = Config.MAZE_DIMENSION;
 const maze = generateMaze(mazeDimension);
 
 
@@ -30,7 +32,7 @@ function gameLoop(timestamp) {
 
 // updates the EventLog objects contained in the events data structure
 function update(elapsed) {
-  if (initialized <= 2){
+  if (initialized <= Config.LOADED){
     initialized++;
   }
 }
@@ -38,7 +40,7 @@ function update(elapsed) {
 
 // takes the data from EventLog when it is active and renders it to the DOM
 function render() {
-  if (initialized === 1){
+  if (initialized === Config.TRUE){
     renderMaze(maze);
   }
 
