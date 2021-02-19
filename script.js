@@ -202,6 +202,34 @@ function Maze(maze){
   }
   exitImage.src = "./assets/Tiles/PathExit.png";
 }
+function renderBestPath(maze){
+  let canvas = document.getElementById("main");
+  let ctx = canvas.getContext("2d");
+  let bestPathImage = new Image();
+  bestPathImage.onload = function(){
+    let x = 96;
+    let y = 96;
+    for (let column = 0; column < maze.dimension; column++){
+      for (let row = 0; row < maze.dimension; row++){
+        console.log(`x: ${x} y: ${y}`);
+        if (maze.grid[column][row].isVisited ){
+          ctx.drawImage(bestPathImage, x, y);
+        }
+        x += 48
+      }
+      x = 96;
+      y += 48;
+    }
+    // draw the player after path images have rendered
+    let playerImage = new Image();
+    playerImage.onload = function(){
+      drawPlayer(maze, ctx, playerImage);
+    }
+    playerImage.src = "./assets/Player.png";
+  }
+  bestPathImage.src = "./assets/Tiles/PathHint3x.png";
+
+}
 function renderMaze(maze){
   // resize canvas if not default canvas element
   let canvas = document.getElementById("main");
@@ -220,4 +248,5 @@ function renderMaze(maze){
   InnerWallE(innerWallBound, drawingBound);
   Corners(cornerBound);
   Maze(maze);
+
 }

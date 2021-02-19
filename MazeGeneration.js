@@ -167,8 +167,8 @@ class Grid {
     return !this.grid[x][y].isWall;
   }
   getStartingCell(){
-    for (let i = 0; i < dimension; i++){
-      for (let j = 0; j < dimension; j++){
+    for (let i = 0; i < this.dimension; i++){
+      for (let j = 0; j < this.dimension; j++){
         if (this.grid[i][j].isStartingPoint){
           return {x: i, y: j};
         }
@@ -229,6 +229,7 @@ function generateMaze(dimension){
   }
   createStart(grid);
   createExit(grid);
+  findShortestPath(grid);
 
   return grid;
 }
@@ -265,14 +266,55 @@ function createExit(grid){
 function findShortestPath(grid){
   let paths = [];
   let startingCell = grid.getStartingCell();
+  console.log(`startingCord: ${startingCell.x},${startingCell.y}`);
   let distance = 0;
-  paths.push(grid.[startingCell.x][startingCell.y]);
+  paths.push(grid.grid[startingCell.x][startingCell.y]);
+  console.log('Next should be starting cell');
+  console.log(grid.grid[startingCell.x][startingCell.y])
+  console.log(paths);
   while (paths.length !== 0){
     let currentCell = paths.shift();
-    currentCell.distanceCounter++;
-    if (currentCell.isExit){
-      return distanceCounter;
+    console.log(currentCell);
+    if (currentCell.top !== null){
+      let topCell = grid.grid[currentCell.top.x][currentCell.top.y];
+      if (topCell !== undefined && topCell.isWall == false && topCell.isVisited == false){
+        topCell.distance = currentCell.distanceCounter + 1;
+        topCell.isVisited = true;
+        paths.push(topCell);
+      }
     }
+    if (currentCell.right !== null){
+      let rightCell = grid.grid[currentCell.right.x][currentCell.right.y];
+      if (rightCell !== undefined && rightCell.isWall == false && rightCell.isVisited == false){
+        rightCell.distance = currentCell.distanceCounter + 1;
+        rightCell.isVisited = true;
+        paths.push(rightCell);
+      }
+    }
+    if (currentCell.bottom !== null){
+      let bottomCell = grid.grid[currentCell.bottom.x][currentCell.bottom.y];
+      if (bottomCell !== undefined && bottomCell.isWall == false && bottomCell.isVisited == false){
+        bottomCell.distance = currentCell.distanceCounter + 1;
+        bottomCell.isVisited = true;
+        paths.push(bottomCell);
+      }
+    }
+    if (currentCell.left !== null){
+      let leftCell = grid.grid[currentCell.left.x][currentCell.left.y];
+      if (leftCell !== undefined && leftCell.isWall == false && leftCell.isVisited == false){
+        leftCell.distance = currentCell.distanceCounter + 1;
+        leftCell.isVisited = true;
+        paths.push(leftCell);
+      }
+    }
+    if (currentCell.isExit){
+      console.log(`shortest path: ${currentCell.distanceCounter}`);
+      return currentCell.distanceCounter;
+    }
+
+
+
+
   }
 
 }

@@ -9,6 +9,7 @@ let mazeDimension = Config.MAZE_DIMENSION;
 const maze = generateMaze(mazeDimension);
 
 
+
 // initial call to start gameLoop
 window.requestAnimationFrame(gameLoop);
 
@@ -35,6 +36,9 @@ function update(elapsed) {
   if (initialized <= Config.LOADED){
     initialized++;
   }
+  if (Config.HINT_ACTIVE && Config.HINT_STATUS <= Config.HINT_LOADED){
+    Config.HINT_STATUS++;
+  }
 }
 
 
@@ -42,6 +46,9 @@ function update(elapsed) {
 function render() {
   if (initialized === Config.TRUE){
     renderMaze(maze);
+  }
+  if (Config.HINT_STATUS == Config.HINT_TRUE){
+    renderBestPath(maze);
   }
 
 }
