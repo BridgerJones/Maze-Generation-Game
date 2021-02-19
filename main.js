@@ -48,7 +48,7 @@ function render() {
     renderMaze(maze);
   }
   if (Config.HINT_STATUS == Config.HINT_TRUE){
-    renderBestPath(maze);
+    setTimeout(renderBestPath(maze),3000);
   }
 
 }

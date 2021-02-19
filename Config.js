@@ -12,6 +12,6 @@ class Configuration{
   HINT_STATUS = 0;
   HINT_TRUE = 1;
   HINT_LOADED = 2;
-  HINT_ACTIVE = true;
+  HINT_ACTIVE = false;
   Configuration(){};
 }

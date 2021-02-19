@@ -108,7 +108,7 @@ function drawWalls(maze, ctx, img){
     for (let row = 0; row < maze.dimension; row++){
       console.log(`x: ${x} y: ${y}`);
       if (maze.grid[column][row].isWall){
-        ctx.drawImage(img, x, y);
+        ctx.drawImage(img, y, x);
       }
       x += 48
     }
@@ -125,7 +125,7 @@ function drawPaths(maze, ctx, img){
     for (let row = 0; row < maze.dimension; row++){
       console.log(`x: ${x} y: ${y}`);
       if (maze.grid[column][row].isWall === false){
-        ctx.drawImage(img, x, y);
+        ctx.drawImage(img, y, x);
       }
       x += 48
     }
@@ -143,7 +143,7 @@ function drawPlayer(maze, ctx, img){
       console.log(`x: ${x} y: ${y}`);
       if (maze.grid[column][row].containsPlayer){
         console.log(`Player drawn at ${column}, ${row}`)
-        ctx.drawImage(img, x, y);
+        ctx.drawImage(img, y, x);
       }
       x += 48
     }
@@ -160,7 +160,7 @@ function drawExit(maze, ctx, img){
     for (let row = 0; row < maze.dimension; row++){
       console.log(`x: ${x} y: ${y}`);
       if (maze.grid[column][row].isExit === true){
-        ctx.drawImage(img, x, y);
+        ctx.drawImage(img, y, x);
       }
       x += 48
     }
@@ -203,6 +203,7 @@ function Maze(maze){
   exitImage.src = "./assets/Tiles/PathExit.png";
 }
 function renderBestPath(maze){
+
   let canvas = document.getElementById("main");
   let ctx = canvas.getContext("2d");
   let bestPathImage = new Image();
@@ -213,7 +214,7 @@ function renderBestPath(maze){
       for (let row = 0; row < maze.dimension; row++){
         console.log(`x: ${x} y: ${y}`);
         if (maze.grid[column][row].isVisited ){
-          ctx.drawImage(bestPathImage, x, y);
+          ctx.drawImage(bestPathImage, y, x);
         }
         x += 48
       }
