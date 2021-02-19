@@ -213,6 +213,7 @@ function generateMaze(dimension){
     wallList.splice(randomIndex, 1);
   }
   createStart(grid);
+  createExit(grid);
 
   return grid;
 }
@@ -227,6 +228,20 @@ function createStart(grid){
     if (cell.isWall === false){
       cell.isStartingPoint = true;
       cell.containsPlayer = true;
+      isCreated = true;
+    }
+  }
+}
+function createExit(grid){
+  let isCreated = false;
+  while (isCreated === false){
+    console.log(grid.dimension);
+    let randomColumn = getRandomInt(0, grid.dimension );
+    console.log(randomColumn);
+    let cell = grid.grid[grid.dimension - 1][randomColumn];
+
+    if (cell.isWall === false){
+      cell.isExit = true;
       isCreated = true;
     }
   }

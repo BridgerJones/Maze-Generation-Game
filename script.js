@@ -151,6 +151,23 @@ function drawPlayer(maze, ctx, img){
     y += 48;
   }
 }
+
+function drawExit(maze, ctx, img){
+
+  let x = 96;
+  let y = 96;
+  for (let column = 0; column < maze.dimension; column++){
+    for (let row = 0; row < maze.dimension; row++){
+      console.log(`x: ${x} y: ${y}`);
+      if (maze.grid[column][row].isExit === true){
+        ctx.drawImage(img, x, y);
+      }
+      x += 48
+    }
+    x = 96;
+    y += 48;
+  }
+}
 function Maze(maze){
   let canvas = document.getElementById("main");
   let ctx = canvas.getContext("2d");
@@ -164,15 +181,26 @@ function Maze(maze){
   let pathImage = new Image();
   pathImage.onload = function(){
     drawPaths(maze, ctx, pathImage);
+    // draw the player after path images have rendered
     let playerImage = new Image();
     playerImage.onload = function(){
       drawPlayer(maze, ctx, playerImage);
     }
     playerImage.src = "./assets/Player.png";
+    // draw the exit after the path images have rendered
+    let exitImage = new Image();
+    exitImage.onload = function(){
+      drawExit(maze, ctx, exitImage);
+    }
+    exitImage.src = "./assets/Tiles/PathExit.png";
   }
   pathImage.src = "./assets/Tiles/PathNeutral3x.png";
 
-  
+  let exitImage = new Image();
+  exitImage.onload = function(){
+    drawExit(maze, ctx, exitImage);
+  }
+  exitImage.src = "./assets/Tiles/PathExit.png";
 }
 function renderMaze(maze){
   // resize canvas if not default canvas element
