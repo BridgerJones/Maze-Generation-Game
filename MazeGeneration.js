@@ -18,6 +18,23 @@ class Cell {
 
   isWall = true;
 
+  isNeutral = true;
+
+  isCorrectPath = false;
+
+  isMarked = false;
+
+  isHint = false;
+
+  isStartingPoint = false;
+
+  isExit = false;
+
+  containsPlayer = false;
+
+
+
+
   constructor(x, y, xMax, yMax){
     this.x = x;
     this.y = y;
@@ -143,6 +160,7 @@ class Grid {
   isCellPath(x, y){
     return !this.grid[x][y].isWall;
   }
+
 }
 
 function getRandomInt(min, max) {
@@ -194,7 +212,24 @@ function generateMaze(dimension){
     }
     wallList.splice(randomIndex, 1);
   }
+  createStart(grid);
+
   return grid;
+}
+function createStart(grid){
+  let isCreated = false;
+  while (isCreated === false){
+    console.log(grid.dimension);
+    let randomColumn = getRandomInt(0, grid.dimension );
+    console.log(randomColumn);
+    let cell = grid.grid[0][randomColumn];
+
+    if (cell.isWall === false){
+      cell.isStartingPoint = true;
+      cell.containsPlayer = true;
+      isCreated = true;
+    }
+  }
 }
 function displayMazeToConsole(maze){
   output = [];

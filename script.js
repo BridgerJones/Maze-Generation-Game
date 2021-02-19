@@ -133,6 +133,24 @@ function drawPaths(maze, ctx, img){
     y += 48;
   }
 }
+
+function drawPlayer(maze, ctx, img){
+
+  let x = 96;
+  let y = 96;
+  for (let column = 0; column < maze.dimension; column++){
+    for (let row = 0; row < maze.dimension; row++){
+      console.log(`x: ${x} y: ${y}`);
+      if (maze.grid[column][row].containsPlayer){
+        console.log(`Player drawn at ${column}, ${row}`)
+        ctx.drawImage(img, x, y);
+      }
+      x += 48
+    }
+    x = 96;
+    y += 48;
+  }
+}
 function Maze(maze){
   let canvas = document.getElementById("main");
   let ctx = canvas.getContext("2d");
@@ -146,8 +164,15 @@ function Maze(maze){
   let pathImage = new Image();
   pathImage.onload = function(){
     drawPaths(maze, ctx, pathImage);
+    let playerImage = new Image();
+    playerImage.onload = function(){
+      drawPlayer(maze, ctx, playerImage);
+    }
+    playerImage.src = "./assets/Player.png";
   }
   pathImage.src = "./assets/Tiles/PathNeutral3x.png";
+
+  
 }
 function renderMaze(maze){
   // resize canvas if not default canvas element
