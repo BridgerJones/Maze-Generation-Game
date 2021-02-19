@@ -32,6 +32,10 @@ class Cell {
 
   containsPlayer = false;
 
+  isVisited = false;
+
+  distanceCounter = 0;
+
 
 
 
@@ -146,6 +150,8 @@ class Cell {
 
 class Grid {
 
+  dimension = 0;
+
   constructor(x, y){
     this.grid = new Array(x);
     for (let i = 0; i < x; i++){
@@ -159,6 +165,15 @@ class Grid {
   }
   isCellPath(x, y){
     return !this.grid[x][y].isWall;
+  }
+  getStartingCell(){
+    for (let i = 0; i < dimension; i++){
+      for (let j = 0; j < dimension; j++){
+        if (this.grid[i][j].isStartingPoint){
+          return {x: i, y: j};
+        }
+      }
+    }
   }
 
 }
@@ -245,6 +260,21 @@ function createExit(grid){
       isCreated = true;
     }
   }
+}
+
+function findShortestPath(grid){
+  let paths = [];
+  let startingCell = grid.getStartingCell();
+  let distance = 0;
+  paths.push(grid.[startingCell.x][startingCell.y]);
+  while (paths.length !== 0){
+    let currentCell = paths.shift();
+    currentCell.distanceCounter++;
+    if (currentCell.isExit){
+      return distanceCounter;
+    }
+  }
+
 }
 function displayMazeToConsole(maze){
   output = [];
