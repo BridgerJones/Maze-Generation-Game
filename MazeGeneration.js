@@ -189,10 +189,10 @@ function generateMaze(dimension){
   grid.dimension = dimension;
   let startingX = getRandomInt(0,dimension);
   let startingY = getRandomInt(0,dimension);
-  console.log(`${startingX} and ${startingY}`)
+
 
   let startingCell = grid.grid[startingX][startingY];
-  console.log(startingCell)
+
 
   // wallList
   let wallList = [];
@@ -205,14 +205,14 @@ function generateMaze(dimension){
     }
 
   });
-  console.log(wallList);
+
   while (wallList.length != 0){
 
     let randomIndex = getRandomInt(0, wallList.length)
     let currentWall = wallList[randomIndex];
 
-    console.log(currentWall);
-    console.log(grid.grid[currentWall.x][currentWall.y]);
+
+
     let pathCount = 0;
     grid.grid[currentWall.x][currentWall.y].getWalls().forEach(wall => {
       if (grid.isCellPath(wall.x, wall.y)){
@@ -236,9 +236,9 @@ function generateMaze(dimension){
 function createStart(grid){
   let isCreated = false;
   while (isCreated === false){
-    console.log(grid.dimension);
+
     let randomColumn = getRandomInt(0, grid.dimension );
-    console.log(randomColumn);
+
     let cell = grid.grid[0][randomColumn];
 
     if (cell.isWall === false){
@@ -252,9 +252,9 @@ function createStart(grid){
 function createExit(grid){
   let isCreated = false;
   while (isCreated === false){
-    console.log(grid.dimension);
+
     let randomColumn = getRandomInt(0, grid.dimension );
-    console.log(randomColumn);
+
     let cell = grid.grid[grid.dimension - 1][randomColumn];
 
     if (cell.isWall === false){
@@ -267,16 +267,16 @@ function createExit(grid){
 function findShortestPath(grid){
   let paths = [];
   let startingCell = grid.getStartingCell();
-  console.log(`startingCord: ${startingCell.x},${startingCell.y}`);
+
   let distance = 0;
   paths.push(grid.grid[startingCell.x][startingCell.y]);
-  console.log('Next should be starting cell');
-  console.log(grid.grid[startingCell.x][startingCell.y])
-  console.log(paths);
+
+
+
   while (paths.length !== 0){
     let currentCell = paths.shift();
     if (currentCell.isExit){
-      console.log(`shortest path: ${currentCell.distanceCounter}`);
+
       while (currentCell.isStartingPoint === false){
         if (currentCell.top !== null){
           let topCell = grid.grid[currentCell.top.x][currentCell.top.y];
@@ -315,7 +315,6 @@ function findShortestPath(grid){
 
       return currentCell.distanceCounter;
     }
-    console.log(currentCell);
     if (currentCell.top !== null){
       let topCell = grid.grid[currentCell.top.x][currentCell.top.y];
       if (topCell !== undefined && topCell.isWall == false && topCell.isVisited == false){
@@ -367,5 +366,5 @@ function displayMazeToConsole(maze){
     output.push("\n");
   }
 
-  console.log(output.toString().replace(/,/g, ""));
+
 }

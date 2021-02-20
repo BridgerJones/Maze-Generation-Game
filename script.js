@@ -106,7 +106,7 @@ function drawWalls(maze, ctx, img){
   let y = 96;
   for (let column = 0; column < maze.dimension; column++){
     for (let row = 0; row < maze.dimension; row++){
-      console.log(`x: ${x} y: ${y}`);
+
       if (maze.grid[column][row].isWall){
         ctx.drawImage(img, y, x);
       }
@@ -123,7 +123,7 @@ function drawPaths(maze, ctx, img){
   let y = 96;
   for (let column = 0; column < maze.dimension; column++){
     for (let row = 0; row < maze.dimension; row++){
-      console.log(`x: ${x} y: ${y}`);
+
       if (maze.grid[column][row].isWall === false){
         ctx.drawImage(img, y, x);
       }
@@ -140,9 +140,9 @@ function drawPlayer(maze, ctx, img){
   let y = 96;
   for (let column = 0; column < maze.dimension; column++){
     for (let row = 0; row < maze.dimension; row++){
-      console.log(`x: ${x} y: ${y}`);
+
       if (maze.grid[column][row].containsPlayer){
-        console.log(`Player drawn at ${column}, ${row}`)
+
         ctx.drawImage(img, y, x);
       }
       x += 48
@@ -158,7 +158,7 @@ function drawExit(maze, ctx, img){
   let y = 96;
   for (let column = 0; column < maze.dimension; column++){
     for (let row = 0; row < maze.dimension; row++){
-      console.log(`x: ${x} y: ${y}`);
+
       if (maze.grid[column][row].isExit === true){
         ctx.drawImage(img, y, x);
       }
@@ -212,7 +212,7 @@ function renderBestPath(maze){
     let y = 96;
     for (let column = 0; column < maze.dimension; column++){
       for (let row = 0; row < maze.dimension; row++){
-        console.log(`x: ${x} y: ${y}`);
+
         if (maze.grid[column][row].isCorrectPath ){
           ctx.drawImage(bestPathImage, y, x);
         }
