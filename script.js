@@ -213,7 +213,7 @@ function renderBestPath(maze){
     for (let column = 0; column < maze.dimension; column++){
       for (let row = 0; row < maze.dimension; row++){
         console.log(`x: ${x} y: ${y}`);
-        if (maze.grid[column][row].isVisited ){
+        if (maze.grid[column][row].isCorrectPath ){
           ctx.drawImage(bestPathImage, y, x);
         }
         x += 48
@@ -227,6 +227,13 @@ function renderBestPath(maze){
       drawPlayer(maze, ctx, playerImage);
     }
     playerImage.src = "./assets/Player.png";
+
+    // draw the exit after the path images have rendered
+    let exitImage = new Image();
+    exitImage.onload = function(){
+      drawExit(maze, ctx, exitImage);
+    }
+    exitImage.src = "./assets/Tiles/PathExit.png";
   }
   bestPathImage.src = "./assets/Tiles/PathHint3x.png";
 

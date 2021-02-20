@@ -1,7 +1,7 @@
 // this file will hold the configuration object as well as initialize an instance of it
 class Configuration{
   // maze dimension
-  MAZE_DIMENSION = 5;
+  MAZE_DIMENSION = 20;
   //TILE SIZE N x N
   TILE_SIZE = 48;
   // maze initialization statuses
