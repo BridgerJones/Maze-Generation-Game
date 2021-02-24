@@ -8,6 +8,8 @@ let initialized = Config.FALSE;
 let mazeDimension = Config.MAZE_DIMENSION;
 const maze = generateMaze(mazeDimension);
 
+initEventListener();
+
 
 
 // initial call to start gameLoop
@@ -51,4 +53,70 @@ function render() {
     setTimeout(renderBestPath(maze),2000);
   }
 
+}
+
+function initEventListener(){
+  document.addEventListener('keydown', (event)=> {
+    // primary up
+    if (event.key === 'w'){
+      console.log(event.key);
+    }
+    //primary left
+    else if (event.key === 'a'){
+      console.log(event.key);
+    }
+    // primary down
+    else if (event.key === 's'){
+      console.log(event.key);
+    }
+    // primary right
+    else if (event.key === 'd'){
+      console.log(event.key);
+    }
+    // secondary up
+    else if (event.key === 'i'){
+      console.log(event.key);
+    }
+    // secondary left
+    else if (event.key === 'j'){
+      console.log(event.key);
+    }
+    // secondary down
+    else if (event.key === 'k'){
+      console.log(event.key);
+    }
+    // secondary right
+    else if (event.key === 'l'){
+      console.log(event.key);
+    }
+    // arrow key event handling, preventDefault is added to prevent page movement
+    else if (event.key === 'ArrowUp'){
+      event.preventDefault();
+      console.log(event.key);
+    }
+    else if (event.key === 'ArrowLeft'){
+      event.preventDefault();
+      console.log(event.key);
+    }
+    else if (event.key === 'ArrowDown'){
+      event.preventDefault();
+      console.log(event.key);
+    }
+    else if (event.key === 'ArrowRight'){
+      event.preventDefault();
+      console.log(event.key);
+    }
+    // toggle next hint
+    else if (event.key === 'h'){
+      console.log(event.key);
+    }
+    // toggle full solution path
+    else if (event.key === 'p'){
+      console.log(event.key);
+    }
+    // toggle breadcrumbs left behind
+    else if (event.key === 'b'){
+      console.log(event.key);
+    }
+  });
 }
