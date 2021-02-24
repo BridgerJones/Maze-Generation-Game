@@ -24,6 +24,7 @@ function gameLoop(timestamp) {
   // calculate the elapsed time since function has been called
   const elapsed = timestamp - start;
 
+  processInput();
   //update
   update(elapsed);
   //render
@@ -42,6 +43,11 @@ function update(elapsed) {
     Config.HINT_STATUS++;
   }
 
+
+
+}
+
+function processInput(){
   events.forEach((event, eventIndex)=>{
     if (event.status === "MOVEUP"){
       event.cycleCount++;
@@ -84,10 +90,7 @@ function update(elapsed) {
 
     }
   });
-
 }
-
-
 // takes the data from EventLog when it is active and renders it to the DOM
 function render() {
   if (initialized === Config.TRUE){
