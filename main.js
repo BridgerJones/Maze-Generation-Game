@@ -24,7 +24,7 @@ function gameLoop(timestamp) {
   // calculate the elapsed time since function has been called
   const elapsed = timestamp - start;
 
-  processInput();
+  processInput(elapsed);
   //update
   update(elapsed);
   //render
