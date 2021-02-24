@@ -41,6 +41,20 @@ function update(elapsed) {
   if (Config.HINT_ACTIVE && Config.HINT_STATUS <= Config.HINT_LOADED){
     Config.HINT_STATUS++;
   }
+
+  events.forEach((event, eventIndex)=>{
+    if (event.status === "MOVEUP"){
+      event.cycleCount++;
+      if (event.cycleCount <= event.lifeCycle){
+        maze.moveUp();
+      }
+      else {
+        events.splice(eventIndex, 1);
+      }
+
+    }
+  });
+
 }
 
 
@@ -52,7 +66,13 @@ function render() {
   if (Config.HINT_STATUS == Config.HINT_TRUE){
     setTimeout(renderBestPath(maze),2000);
   }
+  events.forEach((event, eventIndex)=>{
+    if (event.status === "MOVEUP"){
+      Maze(maze);
+      console.log("MOVEUP RENDER CALL")
 
+    }
+  });
 }
 
 function initEventListener(){
@@ -60,7 +80,8 @@ function initEventListener(){
     // primary up
     if (event.key === 'w'){
       console.log(event.key);
-      maze.moveUp();
+      events.push(new EventObject("MOVEUP", 1));
+      console.log(events);
     }
     //primary left
     else if (event.key === 'a'){
@@ -77,6 +98,7 @@ function initEventListener(){
     // secondary up
     else if (event.key === 'i'){
       console.log(event.key);
+      events.push(new EventObject("MOVEUP", 1));
     }
     // secondary left
     else if (event.key === 'j'){
@@ -93,10 +115,12 @@ function initEventListener(){
     // arrow key event handling, preventDefault is added to prevent page movement
     else if (event.key === 'ArrowUp'){
       event.preventDefault();
+      events.push(new EventObject("MOVEUP", 1));
       console.log(event.key);
     }
     else if (event.key === 'ArrowLeft'){
       event.preventDefault();
+
       console.log(event.key);
     }
     else if (event.key === 'ArrowDown'){
@@ -120,4 +144,15 @@ function initEventListener(){
       console.log(event.key);
     }
   });
+
+  class EventObject{
+    status = "";
+    lifeCycle = 0;
+    cycleCount = 0;
+
+    constructor(status, lifeCycle){
+      this.status = status;
+      this.lifeCycle = lifeCycle;
+    }
+  }
 }
