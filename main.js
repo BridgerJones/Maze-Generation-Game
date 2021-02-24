@@ -53,6 +53,36 @@ function update(elapsed) {
       }
 
     }
+    else if (event.status === "MOVELEFT"){
+      event.cycleCount++;
+      if (event.cycleCount <= event.lifeCycle){
+        maze.moveLeft();
+      }
+      else {
+        events.splice(eventIndex, 1);
+      }
+
+    }
+    else if (event.status === "MOVEDOWN"){
+      event.cycleCount++;
+      if (event.cycleCount <= event.lifeCycle){
+        maze.moveDown();
+      }
+      else {
+        events.splice(eventIndex, 1);
+      }
+
+    }
+    else if (event.status === "MOVERIGHT"){
+      event.cycleCount++;
+      if (event.cycleCount <= event.lifeCycle){
+        maze.moveRight();
+      }
+      else {
+        events.splice(eventIndex, 1);
+      }
+
+    }
   });
 
 }
@@ -72,6 +102,21 @@ function render() {
       console.log("MOVEUP RENDER CALL")
 
     }
+    else if (event.status === "MOVELEFT"){
+      Maze(maze);
+      console.log("MOVELEFT RENDER CALL")
+
+    }
+    else if (event.status === "MOVEDOWN"){
+      Maze(maze);
+      console.log("MOVEDOWN RENDER CALL")
+
+    }
+    else if (event.status === "MOVERIGHT"){
+      Maze(maze);
+      console.log("MOVERIGHT RENDER CALL")
+
+    }
   });
 }
 
@@ -85,15 +130,18 @@ function initEventListener(){
     }
     //primary left
     else if (event.key === 'a'){
+      events.push(new EventObject("MOVELEFT", 1));
       console.log(event.key);
     }
     // primary down
     else if (event.key === 's'){
       console.log(event.key);
+      events.push(new EventObject("MOVEDOWN", 1));
     }
     // primary right
     else if (event.key === 'd'){
       console.log(event.key);
+      events.push(new EventObject("MOVERIGHT", 1));
     }
     // secondary up
     else if (event.key === 'i'){
@@ -102,15 +150,18 @@ function initEventListener(){
     }
     // secondary left
     else if (event.key === 'j'){
+      events.push(new EventObject("MOVELEFT", 1));
       console.log(event.key);
     }
     // secondary down
     else if (event.key === 'k'){
       console.log(event.key);
+      events.push(new EventObject("MOVEDOWN", 1));
     }
     // secondary right
     else if (event.key === 'l'){
       console.log(event.key);
+      events.push(new EventObject("MOVERIGHT", 1));
     }
     // arrow key event handling, preventDefault is added to prevent page movement
     else if (event.key === 'ArrowUp'){
@@ -120,15 +171,17 @@ function initEventListener(){
     }
     else if (event.key === 'ArrowLeft'){
       event.preventDefault();
-
+      events.push(new EventObject("MOVELEFT", 1));
       console.log(event.key);
     }
     else if (event.key === 'ArrowDown'){
       event.preventDefault();
+      events.push(new EventObject("MOVEDOWN", 1));
       console.log(event.key);
     }
     else if (event.key === 'ArrowRight'){
       event.preventDefault();
+      events.push(new EventObject("MOVERIGHT", 1));
       console.log(event.key);
     }
     // toggle next hint

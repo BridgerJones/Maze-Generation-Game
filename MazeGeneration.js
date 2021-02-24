@@ -202,6 +202,54 @@ class Grid {
     }
   }
 
+  moveDown(){
+    let currentPlayerCord = this.getPlayerPosition();
+    let bottom;
+    let currentPlayerCell = this.grid[currentPlayerCord.x][currentPlayerCord.y];
+    console.log(currentPlayerCell)
+      if (currentPlayerCell.bottom != null){
+        bottom = this.grid[currentPlayerCell.bottom.x][currentPlayerCell.bottom.y];
+      }
+
+
+    if (bottom != null && bottom.isWall === false){
+      currentPlayerCell.containsPlayer = false;
+      bottom.containsPlayer = true;
+    }
+  }
+
+  moveLeft(){
+    let currentPlayerCord = this.getPlayerPosition();
+    let left;
+    let currentPlayerCell = this.grid[currentPlayerCord.x][currentPlayerCord.y];
+    console.log(currentPlayerCell)
+      if (currentPlayerCell.left != null){
+        left = this.grid[currentPlayerCell.left.x][currentPlayerCell.left.y];
+      }
+
+
+    if (left != null && left.isWall === false){
+      currentPlayerCell.containsPlayer = false;
+      left.containsPlayer = true;
+    }
+  }
+
+  moveRight(){
+    let currentPlayerCord = this.getPlayerPosition();
+    let right;
+    let currentPlayerCell = this.grid[currentPlayerCord.x][currentPlayerCord.y];
+    console.log(currentPlayerCell)
+      if (currentPlayerCell.right != null){
+        right = this.grid[currentPlayerCell.right.x][currentPlayerCell.right.y];
+      }
+
+
+    if (right != null && right.isWall === false){
+      currentPlayerCell.containsPlayer = false;
+      right.containsPlayer = true;
+    }
+  }
+
 }
 
 function getRandomInt(min, max) {
