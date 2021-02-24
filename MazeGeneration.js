@@ -1,19 +1,19 @@
 class Cell {
   left = {
-    x: null,
-    y: null
+    x: "NULL",
+    y: "NULL"
   }
   top = {
-    x: null,
-    y: null
+    x: "NULL",
+    y: "NULL"
   }
   right = {
-    x: null,
-    y: null
+    x: "NULL",
+    y: "NULL"
   }
   bottom = {
-    x: null,
-    y: null
+    x: "NULL",
+    y: "NULL"
   }
 
   isWall = true;
@@ -173,6 +173,32 @@ class Grid {
           return {x: i, y: j};
         }
       }
+    }
+  }
+
+  getPlayerPosition(){
+    for (let i = 0; i < this.dimension; i++){
+      for (let j = 0; j < this.dimension; j++){
+        if (this.grid[i][j].containsPlayer){
+          return {x: i, y: j};
+        }
+      }
+    }
+  }
+
+  moveUp(){
+    let currentPlayerCord = this.getPlayerPosition();
+    let top;
+    let currentPlayerCell = this.grid[currentPlayerCord.x][currentPlayerCord.y];
+    console.log(currentPlayerCell)
+      if (currentPlayerCell.top != null){
+        top = this.grid[currentPlayerCell.top.x][currentPlayerCell.top.y];
+      }
+
+
+    if (top != null && top.isWall === false){
+      currentPlayerCell.containsPlayer = false;
+      top.containsPlayer = true;
     }
   }
 
@@ -365,6 +391,8 @@ function displayMazeToConsole(maze){
     }
     output.push("\n");
   }
+
+
 
 
 }

@@ -60,6 +60,7 @@ function initEventListener(){
     // primary up
     if (event.key === 'w'){
       console.log(event.key);
+      maze.moveUp();
     }
     //primary left
     else if (event.key === 'a'){
