@@ -15,5 +15,7 @@ class Configuration{
   HINT_ACTIVE = false;
   // NEXT MOVE
   NEXT_MOVE = false;
+  //breadcrumbs
+  DISPLAY_BREADCRUMBS = false;
   Configuration(){};
 }
