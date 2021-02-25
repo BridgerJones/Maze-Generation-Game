@@ -9,7 +9,7 @@ class Configuration{
   TRUE = 1;
   LOADED = 2;
   // hint active statuses
-  HINT_STATUS = 0;
+  HINT_STATUS = false;
   HINT_TRUE = 1;
   HINT_LOADED = 2;
   HINT_ACTIVE = false;

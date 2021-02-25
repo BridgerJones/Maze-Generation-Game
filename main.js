@@ -39,9 +39,9 @@ function update(elapsed) {
   if (initialized <= Config.LOADED){
     initialized++;
   }
-  if (Config.HINT_ACTIVE && Config.HINT_STATUS <= Config.HINT_LOADED){
-    Config.HINT_STATUS++;
-  }
+  // if (Config.HINT_ACTIVE && Config.HINT_STATUS <= Config.HINT_LOADED){
+  //   Config.HINT_STATUS++;
+  // }
 
 
 
