@@ -13,5 +13,7 @@ class Configuration{
   HINT_TRUE = 1;
   HINT_LOADED = 2;
   HINT_ACTIVE = false;
+  // NEXT MOVE
+  NEXT_MOVE = false;
   Configuration(){};
 }

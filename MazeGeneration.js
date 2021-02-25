@@ -204,10 +204,13 @@ class Grid {
       neighbors.push(bottom);
     }
     for (let i = 0; i < neighbors.length; i++){
-      if (neighbors[i].isCorrectPath && neighbors[i].distanceCounter > currentCell){
+      if (neighbors[i].isCorrectPath && neighbors[i].distanceCounter > currentCell.distanceCounter){
         neighbors[i].isNextMove = true;
       }
     }
+    console.log(currentCell);
+    console.log(neighbors);
+
   }
 
   getPlayerPosition(){

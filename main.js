@@ -107,6 +107,25 @@ function processInput(){
       }
 
     }
+    else if (event.status === "TOGGLEHINT"){
+      console.log(event);
+      event.cycleCount++;
+      if (event.cycleCount <= event.lifeCycle){
+        if (Config.NEXT_MOVE){
+          Config.NEXT_MOVE = false;
+        }
+        else {
+          maze.getNextCorrectMove();
+          Config.NEXT_MOVE = true;
+        }
+
+
+      }
+      else {
+        events.splice(eventIndex, 1);
+      }
+
+    }
   });
 }
 // takes the data from EventLog when it is active and renders it to the DOM
@@ -114,11 +133,17 @@ function render() {
   if (initialized === Config.TRUE){
     renderMaze(maze);
   }
-  if (Config.HINT_STATUS === false){
+  if (Config.HINT_STATUS === false && Config.NEXT_MOVE === false){
     Maze(maze);
   }
   if (Config.HINT_STATUS === true){
     setTimeout(renderBestPath(maze),2000);
+  }
+  if (Config.NEXT_MOVE === false && Config.HINT_STATUS === false){
+    Maze(maze);
+  }
+  if (Config.NEXT_MOVE === true){
+    setTimeout(renderNextMove(maze), 2000);
   }
   events.forEach((event, eventIndex)=>{
     if (event.status === "MOVEUP"){
@@ -210,6 +235,7 @@ function initEventListener(){
     }
     // toggle next hint
     else if (event.key === 'h'){
+      events.push(new EventObject("TOGGLEHINT", 1));
       console.log(event.key);
     }
     // toggle full solution path
