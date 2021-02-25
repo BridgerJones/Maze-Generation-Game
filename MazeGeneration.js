@@ -36,6 +36,8 @@ class Cell {
 
   distanceCounter = 0;
 
+  isNextMove = false;
+
 
 
 
@@ -172,6 +174,38 @@ class Grid {
         if (this.grid[i][j].isStartingPoint){
           return {x: i, y: j};
         }
+      }
+    }
+  }
+
+  getNextCorrectMove(){
+    let playerCord = this.getPlayerPosition();
+    let currentCell = this.grid[playerCord.x][playerCord.y];
+    let neighbors = [];
+    let top;
+    let left;
+    let right;
+    let bottom;
+
+    if (currentCell.top !== null){
+      top = this.grid[currentCell.top.x][currentCell.top.y];
+      neighbors.push(top);
+    }
+    if (currentCell.left !== null){
+      left = this.grid[currentCell.left.x][currentCell.left.y];
+      neighbors.push(left);
+    }
+    if (currentCell.right !== null){
+      right = this.grid[currentCell.right.x][currentCell.right.y];
+      neighbors.push(right);
+    }
+    if (currentCell.bottom !== null){
+      bottom = this.grid[currentCell.bottom.x][currentCell.bottom.y];
+      neighbors.push(bottom);
+    }
+    for (let i = 0; i < neighbors.length; i++){
+      if (neighbors[i].isCorrectPath && neighbors[i].distanceCounter > currentCell){
+        neighbors[i].isNextMove = true;
       }
     }
   }
