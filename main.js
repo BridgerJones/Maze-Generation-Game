@@ -95,9 +95,11 @@ function processInput(){
       if (event.cycleCount <= event.lifeCycle){
         if (Config.HINT_STATUS){
           Config.HINT_STATUS = false;
+          events.splice(eventIndex, 1);
         }
         else {
           Config.HINT_STATUS = true;
+          events.splice(eventIndex, 1);
         }
 
 
@@ -112,11 +114,14 @@ function processInput(){
       event.cycleCount++;
       if (event.cycleCount <= event.lifeCycle){
         if (Config.NEXT_MOVE){
+          maze.resetNextCorrectMove();
           Config.NEXT_MOVE = false;
+          events.splice(eventIndex, 1);
         }
         else {
           maze.getNextCorrectMove();
           Config.NEXT_MOVE = true;
+          events.splice(eventIndex, 1);
         }
 
 
