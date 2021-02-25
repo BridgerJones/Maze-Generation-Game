@@ -89,6 +89,24 @@ function processInput(){
       }
 
     }
+
+    else if (event.status === "TOGGLEPATH"){
+      event.cycleCount++;
+      if (event.cycleCount <= event.lifeCycle){
+        if (Config.HINT_STATUS){
+          Config.HINT_STATUS = false;
+        }
+        else {
+          Config.HINT_STATUS = true;
+        }
+
+
+      }
+      else {
+        events.splice(eventIndex, 1);
+      }
+
+    }
   });
 }
 // takes the data from EventLog when it is active and renders it to the DOM
@@ -96,7 +114,10 @@ function render() {
   if (initialized === Config.TRUE){
     renderMaze(maze);
   }
-  if (Config.HINT_STATUS == Config.HINT_TRUE){
+  if (Config.HINT_STATUS === false){
+    Maze(maze);
+  }
+  if (Config.HINT_STATUS === true){
     setTimeout(renderBestPath(maze),2000);
   }
   events.forEach((event, eventIndex)=>{
@@ -193,6 +214,7 @@ function initEventListener(){
     }
     // toggle full solution path
     else if (event.key === 'p'){
+      events.push(new EventObject("TOGGLEPATH", 1));
       console.log(event.key);
     }
     // toggle breadcrumbs left behind
