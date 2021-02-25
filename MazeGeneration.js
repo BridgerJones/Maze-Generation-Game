@@ -245,6 +245,7 @@ class Grid {
     if (top != null && top.isWall === false){
       currentPlayerCell.containsPlayer = false;
       top.containsPlayer = true;
+      top.isMarked = true;
     }
   }
 
@@ -261,6 +262,7 @@ class Grid {
     if (bottom != null && bottom.isWall === false){
       currentPlayerCell.containsPlayer = false;
       bottom.containsPlayer = true;
+      bottom.isMarked = true;
     }
   }
 
@@ -277,6 +279,7 @@ class Grid {
     if (left != null && left.isWall === false){
       currentPlayerCell.containsPlayer = false;
       left.containsPlayer = true;
+      left.isMarked = true;
     }
   }
 
@@ -293,6 +296,7 @@ class Grid {
     if (right != null && right.isWall === false){
       currentPlayerCell.containsPlayer = false;
       right.containsPlayer = true;
+      right.isMarked = true;
     }
   }
 
@@ -365,6 +369,7 @@ function createStart(grid){
       cell.isStartingPoint = true;
       cell.containsPlayer = true;
       cell.isVisited = true;
+      cell.isMarked = true;
       isCreated = true;
     }
   }
