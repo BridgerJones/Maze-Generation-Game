@@ -212,6 +212,15 @@ class Grid {
     console.log(neighbors);
 
   }
+  resetNextCorrectMove(){
+    for (let i = 0; i < this.dimension; i++){
+      for (let j = 0; j < this.dimension; j++){
+        if (this.grid[i][j].isNextMove){
+          this.grid[i][j].isNextMove = false;
+        }
+      }
+    }
+  }
 
   getPlayerPosition(){
     for (let i = 0; i < this.dimension; i++){
