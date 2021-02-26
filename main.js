@@ -1,4 +1,6 @@
 
+document.getElementById("highScore").innerText = window.localStorage.getItem("highScore");
+
 function main(mazeSize){
   document.getElementById("map-select").style.display = "none";
   document.getElementById("newGame").hidden = false;
@@ -227,11 +229,16 @@ function main(mazeSize){
         console.log("MOVERIGHT RENDER CALL")
 
       }
-      
+
     });
 
     if (Config.GAME_ACTIVE === false){
       alertWin.hidden = false;
+      if (window.localStorage.getItem("highScore") < Config.SCORE || window.localStorage.getItem("highScore") === undefined){
+        window.localStorage.setItem("highScore", Config.SCORE);
+        document.getElementById("highScore").innerText =window.localStorage.getItem("highScore");
+      }
+
     }
 
   }
