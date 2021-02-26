@@ -2,6 +2,8 @@
 document.getElementById("highScore").innerText = window.localStorage.getItem("highScore");
 // this is the main function that holds the game loop
 function main(mazeSize){
+  let audio = document.getElementById('audio');
+  audio.play();
   // on game init, hide the map select
   document.getElementById("map-select").style.display = "none";
   // reveal the option to start a new game
