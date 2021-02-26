@@ -252,6 +252,7 @@ function main(mazeSize){
     // on game win
     if (Config.GAME_ACTIVE === false){
       alertWin.hidden = false;
+      document.getElementById("credits").hidden = false;
       // if the current score is greater than the stored high score, save it to localStorage and display
       if (window.localStorage.getItem("highScore") < Config.SCORE || window.localStorage.getItem("highScore") === undefined){
         window.localStorage.setItem("highScore", Config.SCORE);
