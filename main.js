@@ -47,7 +47,16 @@ function main(mazeSize){
     //   Config.HINT_STATUS++;
     // }
     Config.TIMER = Math.floor(elapsed / 1000);
-    Config.SCORE = 10000 - Config.TIMER * 5;
+    if (Config.HINT_STATUS){
+      Config.SCORE = Config.SCORE - (Config.TIMER + 2500);
+    }
+    else if (Config.NEXT_MOVE){
+      Config.SCORE = Config.SCORE - (Config.TIMER + 500);
+    }
+    else {
+      Config.SCORE = Config.SCORE - Config.TIMER;
+    }
+
 
   }
 
