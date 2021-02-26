@@ -46,10 +46,8 @@ function main(mazeSize){
     // if (Config.HINT_ACTIVE && Config.HINT_STATUS <= Config.HINT_LOADED){
     //   Config.HINT_STATUS++;
     // }
-
-    let timer = document.getElementById("time");
-    let date = new Date();
-    timer.innerText = Math.floor(elapsed / 1000);
+    Config.TIMER = Math.floor(elapsed / 1000);
+    Config.SCORE = 10000 - Config.TIMER * 5;
 
   }
 
@@ -163,6 +161,10 @@ function main(mazeSize){
   }
   // takes the data from EventLog when it is active and renders it to the DOM
   function render() {
+    let timer = document.getElementById("time");
+    timer.innerText = Config.TIMER;
+    let points = document.getElementById("score");
+    points.innerText = Config.SCORE;
     if (initialized === Config.TRUE){
       renderMaze(maze);
     }

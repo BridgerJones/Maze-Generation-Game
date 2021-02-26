@@ -20,5 +20,7 @@ class Configuration{
 
   //timer
   TIMER = 0;
+  // starting points
+  SCORE = 0;
   Configuration(){};
 }
