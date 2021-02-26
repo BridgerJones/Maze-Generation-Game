@@ -58,8 +58,8 @@ class Grid {
         neighbors[i].isNextMove = true;
       }
     }
-    console.log(currentCell);
-    console.log(neighbors);
+
+
 
   }
   // resets the next correct move on toggle off
@@ -87,7 +87,7 @@ class Grid {
     let currentPlayerCord = this.getPlayerPosition();
     let top;
     let currentPlayerCell = this.grid[currentPlayerCord.x][currentPlayerCord.y];
-    console.log(currentPlayerCell)
+
       if (currentPlayerCell.top != null){
         top = this.grid[currentPlayerCell.top.x][currentPlayerCell.top.y];
       }
@@ -104,7 +104,7 @@ class Grid {
     let currentPlayerCord = this.getPlayerPosition();
     let bottom;
     let currentPlayerCell = this.grid[currentPlayerCord.x][currentPlayerCord.y];
-    console.log(currentPlayerCell)
+
       if (currentPlayerCell.bottom != null){
         bottom = this.grid[currentPlayerCell.bottom.x][currentPlayerCell.bottom.y];
       }
@@ -121,7 +121,7 @@ class Grid {
     let currentPlayerCord = this.getPlayerPosition();
     let left;
     let currentPlayerCell = this.grid[currentPlayerCord.x][currentPlayerCord.y];
-    console.log(currentPlayerCell)
+
       if (currentPlayerCell.left != null){
         left = this.grid[currentPlayerCell.left.x][currentPlayerCell.left.y];
       }
@@ -138,7 +138,7 @@ class Grid {
     let currentPlayerCord = this.getPlayerPosition();
     let right;
     let currentPlayerCell = this.grid[currentPlayerCord.x][currentPlayerCord.y];
-    console.log(currentPlayerCell)
+
       if (currentPlayerCell.right != null){
         right = this.grid[currentPlayerCell.right.x][currentPlayerCell.right.y];
       }

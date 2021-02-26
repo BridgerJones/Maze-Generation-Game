@@ -142,7 +142,7 @@ function main(mazeSize){
 
       }
       else if (event.status === "TOGGLEHINT"){
-        console.log(event);
+
         event.cycleCount++;
         if (event.cycleCount <= event.lifeCycle){
           if (Config.HINT_ACTIVE){
@@ -164,7 +164,7 @@ function main(mazeSize){
 
       }
       else if (event.status === "TOGGLEBREADCRUMB"){
-        console.log(event);
+
         event.cycleCount++;
         if (event.cycleCount <= event.lifeCycle){
           if (Config.DISPLAY_BREADCRUMBS){
@@ -231,22 +231,22 @@ function main(mazeSize){
     events.forEach((event, eventIndex)=>{
       if (event.status === "MOVEUP"){
         renderInnerMaze(maze);
-        console.log("MOVEUP RENDER CALL")
+
 
       }
       else if (event.status === "MOVELEFT"){
         renderInnerMaze(maze);
-        console.log("MOVELEFT RENDER CALL")
+
 
       }
       else if (event.status === "MOVEDOWN"){
         renderInnerMaze(maze);
-        console.log("MOVEDOWN RENDER CALL")
+
 
       }
       else if (event.status === "MOVERIGHT"){
         renderInnerMaze(maze);
-        console.log("MOVERIGHT RENDER CALL")
+
 
       }
 
@@ -269,80 +269,80 @@ function main(mazeSize){
     document.addEventListener('keydown', (event)=> {
       // primary up
       if (event.key === 'w'){
-        console.log(event.key);
+
         events.push(new EventObject("MOVEUP", 1));
-        console.log(events);
+
       }
       //primary left
       else if (event.key === 'a'){
         events.push(new EventObject("MOVELEFT", 1));
-        console.log(event.key);
+
       }
       // primary down
       else if (event.key === 's'){
-        console.log(event.key);
+
         events.push(new EventObject("MOVEDOWN", 1));
       }
       // primary right
       else if (event.key === 'd'){
-        console.log(event.key);
+
         events.push(new EventObject("MOVERIGHT", 1));
       }
       // secondary up
       else if (event.key === 'i'){
-        console.log(event.key);
+
         events.push(new EventObject("MOVEUP", 1));
       }
       // secondary left
       else if (event.key === 'j'){
         events.push(new EventObject("MOVELEFT", 1));
-        console.log(event.key);
+
       }
       // secondary down
       else if (event.key === 'k'){
-        console.log(event.key);
+
         events.push(new EventObject("MOVEDOWN", 1));
       }
       // secondary right
       else if (event.key === 'l'){
-        console.log(event.key);
+
         events.push(new EventObject("MOVERIGHT", 1));
       }
       // arrow key event handling, preventDefault is added to prevent page movement
       else if (event.key === 'ArrowUp'){
         event.preventDefault();
         events.push(new EventObject("MOVEUP", 1));
-        console.log(event.key);
+
       }
       else if (event.key === 'ArrowLeft'){
         event.preventDefault();
         events.push(new EventObject("MOVELEFT", 1));
-        console.log(event.key);
+
       }
       else if (event.key === 'ArrowDown'){
         event.preventDefault();
         events.push(new EventObject("MOVEDOWN", 1));
-        console.log(event.key);
+
       }
       else if (event.key === 'ArrowRight'){
         event.preventDefault();
         events.push(new EventObject("MOVERIGHT", 1));
-        console.log(event.key);
+
       }
       // toggle next hint
       else if (event.key === 'h'){
         events.push(new EventObject("TOGGLEHINT", 1));
-        console.log(event.key);
+
       }
       // toggle full solution path
       else if (event.key === 'p'){
         events.push(new EventObject("TOGGLEPATH", 1));
-        console.log(event.key);
+
       }
       // toggle breadcrumbs left behind
       else if (event.key === 'b'){
         events.push(new EventObject("TOGGLEBREADCRUMB", 1));
-        console.log(event.key);
+
       }
     });
     // inner class that is used to represent Events as they enter the events list
