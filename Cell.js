@@ -1,22 +1,45 @@
 class Cell {
   left = {
-    x: null,
-    y: null
+    x: "NULL",
+    y: "NULL"
   }
   top = {
-    x: null,
-    y: null
+    x: "NULL",
+    y: "NULL"
   }
   right = {
-    x: null,
-    y: null
+    x: "NULL",
+    y: "NULL"
   }
   bottom = {
-    x: null,
-    y: null
+    x: "NULL",
+    y: "NULL"
   }
 
   isWall = true;
+
+  isNeutral = true;
+
+  isCorrectPath = false;
+
+  isMarked = false;
+
+  isHint = false;
+
+  isStartingPoint = false;
+
+  isExit = false;
+
+  containsPlayer = false;
+
+  isVisited = false;
+
+  distanceCounter = 0;
+
+  isNextMove = false;
+
+
+
 
   constructor(x, y, xMax, yMax){
     this.x = x;
