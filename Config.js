@@ -17,5 +17,8 @@ class Configuration{
   NEXT_MOVE = false;
   //breadcrumbs
   DISPLAY_BREADCRUMBS = false;
+
+  //timer
+  TIMER = 0;
   Configuration(){};
 }

@@ -47,7 +47,9 @@ function main(mazeSize){
     //   Config.HINT_STATUS++;
     // }
 
-
+    let timer = document.getElementById("time");
+    let date = new Date();
+    timer.innerText = Math.floor(elapsed / 1000);
 
   }
 
