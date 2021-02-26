@@ -1,5 +1,7 @@
 // this file will hold the configuration object as well as initialize an instance of it
 class Configuration{
+  // Game State
+  GAME_ACTIVE = true;
   // maze dimension
   MAZE_DIMENSION = 20;
   //TILE SIZE N x N

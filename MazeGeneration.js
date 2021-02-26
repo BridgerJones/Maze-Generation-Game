@@ -300,6 +300,16 @@ class Grid {
     }
   }
 
+  isGameOver(){
+    let playerCord = this.getPlayerPosition();
+    let playerCell = this.grid[playerCord.x][playerCord.y];
+    if (playerCell.isExit){
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
 }
 
 function getRandomInt(min, max) {

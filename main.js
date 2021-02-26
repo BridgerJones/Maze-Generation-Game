@@ -40,23 +40,27 @@ function main(mazeSize){
 
   // updates the EventLog objects contained in the events data structure
   function update(elapsed) {
-    if (initialized <= Config.LOADED){
-      initialized++;
-    }
-    // if (Config.HINT_ACTIVE && Config.HINT_STATUS <= Config.HINT_LOADED){
-    //   Config.HINT_STATUS++;
-    // }
-    Config.TIMER = Math.floor(elapsed / 1000);
-    if (Config.HINT_STATUS){
-      Config.SCORE = Config.SCORE - (Config.TIMER + 2500);
-    }
-    else if (Config.NEXT_MOVE){
-      Config.SCORE = Config.SCORE - (Config.TIMER + 500);
-    }
-    else {
-      Config.SCORE = Config.SCORE - Config.TIMER;
-    }
+    if (Config.GAME_ACTIVE){
+      if (initialized <= Config.LOADED){
+        initialized++;
+      }
+      if (maze.isGameOver() === false){
+        Config.TIMER = Math.floor(elapsed / 1000);
+        if (Config.HINT_STATUS){
+          Config.SCORE = Config.SCORE - (Config.TIMER + 2500);
+        }
+        else if (Config.NEXT_MOVE){
+          Config.SCORE = Config.SCORE - (Config.TIMER + 500);
+        }
+        else {
+          Config.SCORE = Config.SCORE - Config.TIMER;
+        }
+      }
+      else {
+        Config.GAME_ACTIVE = false;
 
+      }
+    }
 
   }
 
@@ -176,6 +180,7 @@ function main(mazeSize){
     points.innerText = Config.SCORE;
     let alertHint = document.getElementById("alertHint");
     let alertSolution = document.getElementById("alertSolution");
+    let alertWin = document.getElementById("alertWin");
     if (initialized === Config.TRUE){
       renderMaze(maze);
     }
@@ -222,7 +227,13 @@ function main(mazeSize){
         console.log("MOVERIGHT RENDER CALL")
 
       }
+      
     });
+
+    if (Config.GAME_ACTIVE === false){
+      alertWin.hidden = false;
+    }
+
   }
 
   function initEventListener(){
