@@ -315,9 +315,11 @@ function renderBreadCrumbs(maze){
 function renderMaze(maze){
   // resize canvas if not default canvas element
   let canvas = document.getElementById("main");
+  let ctx = canvas.getContext("2d");
   let canvasBounds = (maze.dimension + 4) * 48;
   canvas.width = canvasBounds;
   canvas.height = canvasBounds;
+  ctx.clearRect(0,0,canvasBounds,canvasBounds);
   let outerWallBound = (maze.dimension + 3) * 48;
   let innerWallBound = (maze.dimension + 1) * 48;
   let cornerBound = (maze.dimension + 2) * 48;

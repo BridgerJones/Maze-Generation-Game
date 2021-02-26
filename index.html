@@ -24,25 +24,32 @@
 
       </div>
       <div class="col">
-          <img src="./assets/Time.png" alt="">
-          <span>palceholdalskdfj</span>
+          <span class="h1">Time:</span>
+          <span id="time" class="h1">00:00</span>
           <br>
-          <img src="./assets/Score.png" alt="">
-          <span>Placeholder</span>
+          <span class="h1">Score:</span>
+          <span id="score" class="h1">000</span>
           <br>
-          <img src="./assets/Select-a-New-Map.png" alt="">
+          <img id="newGame" class="menu-item" src="./assets/New-Game.png" onclick="location.reload()" hidden alt="">
           <br>
-          <img class="menu-item" src="./assets/Easy.png" alt="">
-          <br>
-          <img class="menu-item" src="./assets/Medium.png" alt="">
-          <br>
-          <img class="menu-item" src="./assets/Hard.png" alt="">
-          <br>
-          <img class="menu-item" src="./assets/Expert.png" alt="">
-          <br>
+          <div id="map-select" class="">
+            <img src="./assets/Select-a-New-Map.png" alt="">
+            <br>
+            <img class="menu-item" src="./assets/Easy.png" onclick="main(5)"alt="">
+            <br>
+            <img class="menu-item" src="./assets/Medium.png" onclick="main(10)"alt="">
+            <br>
+            <img class="menu-item" src="./assets/Hard.png"onclick="main(15)" alt="">
+            <br>
+            <img class="menu-item" src="./assets/Expert.png"onclick="main(20)" alt="">
+            <br>
+          </div>
+
           <img src="./assets/Movement.png" alt="">
           <br>
           <img src="./assets/Equipment.png" alt="">
+          <br>
+
 
       </div>
     </div>
