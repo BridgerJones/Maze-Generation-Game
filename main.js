@@ -1,8 +1,10 @@
-
+// initialize the highscore element
 document.getElementById("highScore").innerText = window.localStorage.getItem("highScore");
-
+// this is the main function that holds the game loop
 function main(mazeSize){
+  // on game init, hide the map select
   document.getElementById("map-select").style.display = "none";
+  // reveal the option to start a new game
   document.getElementById("newGame").hidden = false;
   // array to hold all of the EventLog Objects
   let events = [];
@@ -10,10 +12,13 @@ function main(mazeSize){
   let Config = new Configuration();
   // holds the initial time stamp from which elapsed will be calculated
   let start;
+  // bool flag that assists in initialized state transfer
   let initialized = Config.FALSE;
+  // size of the maze
   let mazeDimension = mazeSize;
+  // get a maze for this game session
   const maze = generateMaze(mazeDimension);
-
+  // initialize controls
   initEventListener();
 
 
@@ -29,7 +34,7 @@ function main(mazeSize){
     }
     // calculate the elapsed time since function has been called
     const elapsed = timestamp - start;
-
+    // handle EventObjects created by player input
     processInput(elapsed);
     //update
     update(elapsed);
@@ -42,22 +47,28 @@ function main(mazeSize){
 
   // updates the EventLog objects contained in the events data structure
   function update(elapsed) {
+    // if game has not been won yet
     if (Config.GAME_ACTIVE){
       if (initialized <= Config.LOADED){
         initialized++;
       }
       if (maze.isGameOver() === false){
+        // setting the timer
         Config.TIMER = Math.floor(elapsed / 1000);
-        if (Config.HINT_STATUS){
+        // additional penalty for solution being displayed
+        if (Config.SOLUTION_ACTIVE){
           Config.SCORE = Config.SCORE - (Config.TIMER + 2500);
         }
-        else if (Config.NEXT_MOVE){
+        // additional penalty for hint being displayed
+        else if (Config.HINT_ACTIVE){
           Config.SCORE = Config.SCORE - (Config.TIMER + 500);
         }
+        // default point deduction without modifiers
         else {
           Config.SCORE = Config.SCORE - Config.TIMER;
         }
       }
+
       else {
         Config.GAME_ACTIVE = false;
 
@@ -65,7 +76,7 @@ function main(mazeSize){
     }
 
   }
-
+  // handle input from controls and call respective methods
   function processInput(){
     events.forEach((event, eventIndex)=>{
       if (event.status === "MOVEUP"){
@@ -112,12 +123,12 @@ function main(mazeSize){
       else if (event.status === "TOGGLEPATH"){
         event.cycleCount++;
         if (event.cycleCount <= event.lifeCycle){
-          if (Config.HINT_STATUS){
-            Config.HINT_STATUS = false;
+          if (Config.SOLUTION_ACTIVE){
+            Config.SOLUTION_ACTIVE = false;
             events.splice(eventIndex, 1);
           }
           else {
-            Config.HINT_STATUS = true;
+            Config.SOLUTION_ACTIVE = true;
             events.splice(eventIndex, 1);
           }
 
@@ -132,14 +143,14 @@ function main(mazeSize){
         console.log(event);
         event.cycleCount++;
         if (event.cycleCount <= event.lifeCycle){
-          if (Config.NEXT_MOVE){
+          if (Config.HINT_ACTIVE){
             maze.resetNextCorrectMove();
-            Config.NEXT_MOVE = false;
+            Config.HINT_ACTIVE = false;
             events.splice(eventIndex, 1);
           }
           else {
             maze.getNextCorrectMove();
-            Config.NEXT_MOVE = true;
+            Config.HINT_ACTIVE = true;
             events.splice(eventIndex, 1);
           }
 
@@ -176,64 +187,72 @@ function main(mazeSize){
   }
   // takes the data from EventLog when it is active and renders it to the DOM
   function render() {
+
     let timer = document.getElementById("time");
     timer.innerText = Config.TIMER;
+
     let points = document.getElementById("score");
     points.innerText = Config.SCORE;
+
     let alertHint = document.getElementById("alertHint");
     let alertSolution = document.getElementById("alertSolution");
     let alertWin = document.getElementById("alertWin");
+    // this draws the whole maze initially
     if (initialized === Config.TRUE){
       renderMaze(maze);
     }
-    if (Config.HINT_STATUS === false && Config.NEXT_MOVE !== true){
-      Maze(maze);
+    if (Config.SOLUTION_ACTIVE === false && Config.HINT_ACTIVE !== true){
+      renderInnerMaze(maze);
       alertSolution.hidden = true;
     }
-    if (Config.HINT_STATUS === true){
-      setTimeout(renderBestPath(maze),2000);
+    if (Config.SOLUTION_ACTIVE === true){
+      // timeout is used to help avoid rendering conflict on larger maze sizes, sizes larger than 50 X 50 may need a longer rendering timeout
+      setTimeout(renderBestPath(maze),Config.RENDERING_TIMEOUT);
       alertSolution.hidden = false;
     }
-    if (Config.NEXT_MOVE === false && Config.HINT_STATUS !== true){
-      Maze(maze);
+    if (Config.HINT_ACTIVE === false && Config.SOLUTION_ACTIVE !== true){
+      renderInnerMaze(maze);
       alertHint.hidden = true;
     }
-    if (Config.NEXT_MOVE === true){
-      setTimeout(renderNextMove(maze), 2000);
+    if (Config.HINT_ACTIVE === true){
+      // timeout is used to help avoid rendering conflict on larger maze sizes, sizes larger than 50 X 50 may need a longer rendering timeout
+      setTimeout(renderNextMove(maze), Config.RENDERING_TIMEOUT);
       alertHint.hidden = false;
     }
     if (Config.DISPLAY_BREADCRUMBS === true){
-      setTimeout(renderBreadCrumbs(maze), 2000);
+      // timeout is used to help avoid rendering conflict on larger maze sizes, sizes larger than 50 X 50 may need a longer rendering timeout
+      setTimeout(renderBreadCrumbs(maze), Config.RENDERING_TIMEOUT);
     }
-    if (Config.DISPLAY_BREADCRUMBS === false && Config.HINT_STATUS !== true && Config.NEXT_MOVE !== true){
-      Maze(maze);
+    if (Config.DISPLAY_BREADCRUMBS === false && Config.SOLUTION_ACTIVE !== true && Config.HINT_ACTIVE !== true){
+      renderInnerMaze(maze);
     }
     events.forEach((event, eventIndex)=>{
       if (event.status === "MOVEUP"){
-        Maze(maze);
+        renderInnerMaze(maze);
         console.log("MOVEUP RENDER CALL")
 
       }
       else if (event.status === "MOVELEFT"){
-        Maze(maze);
+        renderInnerMaze(maze);
         console.log("MOVELEFT RENDER CALL")
 
       }
       else if (event.status === "MOVEDOWN"){
-        Maze(maze);
+        renderInnerMaze(maze);
         console.log("MOVEDOWN RENDER CALL")
 
       }
       else if (event.status === "MOVERIGHT"){
-        Maze(maze);
+        renderInnerMaze(maze);
         console.log("MOVERIGHT RENDER CALL")
 
       }
 
     });
-
+    // on game win
     if (Config.GAME_ACTIVE === false){
       alertWin.hidden = false;
+      // if the current score is greater than the stored high score, save it to localStorage and display
       if (window.localStorage.getItem("highScore") < Config.SCORE || window.localStorage.getItem("highScore") === undefined){
         window.localStorage.setItem("highScore", Config.SCORE);
         document.getElementById("highScore").innerText =window.localStorage.getItem("highScore");
@@ -242,7 +261,7 @@ function main(mazeSize){
     }
 
   }
-
+  // sets up all of the control inputs
   function initEventListener(){
     document.addEventListener('keydown', (event)=> {
       // primary up
@@ -323,7 +342,7 @@ function main(mazeSize){
         console.log(event.key);
       }
     });
-
+    // inner class that is used to represent Events as they enter the events list
     class EventObject{
       status = "";
       lifeCycle = 0;

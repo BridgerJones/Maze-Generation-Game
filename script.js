@@ -168,7 +168,7 @@ function drawExit(maze, ctx, img){
     y += 48;
   }
 }
-function Maze(maze){
+function renderInnerMaze(maze){
   let canvas = document.getElementById("main");
   let ctx = canvas.getContext("2d");
 
@@ -331,6 +331,6 @@ function renderMaze(maze){
   InnerWallW(innerWallBound);
   InnerWallE(innerWallBound, drawingBound);
   Corners(cornerBound);
-  Maze(maze);
+  renderInnerMaze(maze);
 
 }

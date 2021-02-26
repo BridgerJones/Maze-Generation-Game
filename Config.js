@@ -2,8 +2,7 @@
 class Configuration{
   // Game State
   GAME_ACTIVE = true;
-  // maze dimension
-  MAZE_DIMENSION = 20;
+
   //TILE SIZE N x N
   TILE_SIZE = 48;
   // maze initialization statuses
@@ -11,12 +10,11 @@ class Configuration{
   TRUE = 1;
   LOADED = 2;
   // hint active statuses
-  HINT_STATUS = false;
-  HINT_TRUE = 1;
-  HINT_LOADED = 2;
+  SOLUTION_ACTIVE = false;
+
+  // HINT STATE
   HINT_ACTIVE = false;
-  // NEXT MOVE
-  NEXT_MOVE = false;
+
   //breadcrumbs
   DISPLAY_BREADCRUMBS = false;
 
@@ -24,5 +22,7 @@ class Configuration{
   TIMER = 0;
   // starting points
   SCORE = 1000000;
-  Configuration(){};
+  // rendering timeout
+  RENDERING_TIMEOUT = 2000;
+  constructor(){};
 }
