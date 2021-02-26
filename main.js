@@ -174,20 +174,26 @@ function main(mazeSize){
     timer.innerText = Config.TIMER;
     let points = document.getElementById("score");
     points.innerText = Config.SCORE;
+    let alertHint = document.getElementById("alertHint");
+    let alertSolution = document.getElementById("alertSolution");
     if (initialized === Config.TRUE){
       renderMaze(maze);
     }
     if (Config.HINT_STATUS === false && Config.NEXT_MOVE !== true){
       Maze(maze);
+      alertSolution.hidden = true;
     }
     if (Config.HINT_STATUS === true){
       setTimeout(renderBestPath(maze),2000);
+      alertSolution.hidden = false;
     }
     if (Config.NEXT_MOVE === false && Config.HINT_STATUS !== true){
       Maze(maze);
+      alertHint.hidden = true;
     }
     if (Config.NEXT_MOVE === true){
       setTimeout(renderNextMove(maze), 2000);
+      alertHint.hidden = false;
     }
     if (Config.DISPLAY_BREADCRUMBS === true){
       setTimeout(renderBreadCrumbs(maze), 2000);
