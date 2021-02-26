@@ -1,0 +1,14 @@
+.game{
+  height: 1200;
+  padding-left: 5%;
+  background-color: rgb(240, 199, 78);
+}
+.title {
+  width: 50%;
+  height: 50%;
+
+}
+
+img.menu-item:hover {
+  background-color: black;
+}
